@@ -8,7 +8,7 @@ export class RegisterUser{
         private userRepository:IUserRepository
     ){}
 
-    async execute(dto:CreateUserDTO): Promise<User>{
+    async execute(dto:CreateUserDTO): Promise<User|undefined>{
         const user = {
             name:dto.name,
             email:dto.email,
