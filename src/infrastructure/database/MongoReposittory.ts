@@ -13,7 +13,6 @@ export class MongoRepository implements IUserRepository{
                 password: user.password
             })
             await newUser.save()
-            console.log(newUser)
             return {name:newUser.name, email:newUser.email, password:newUser.password}  
            
         } catch (error) {

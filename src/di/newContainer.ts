@@ -4,6 +4,7 @@ import { InMemory } from "../infrastructure/InMemory/InMemory";
 import { AuthController } from "../interface/controller/authController";
 import { LoginUser } from "../use-cases/auth/LoginUser";
 import { RegisterUser } from "../use-cases/auth/RegisterUseCase";
+import {BcryptService} from "../infrastructure/auth/BcryptService"
 
 export class DiContainer {
     private static instance:DiContainer
@@ -24,9 +25,10 @@ export class DiContainer {
         const jwtService = new JWTService("access","refresh")
 
         const userRepository = new MongoRepository()
+        const bcryptService  = new BcryptService
 
-        const registerUser = new RegisterUser(userRepository)
-        const loginUser = new LoginUser(userRepository,jwtService)
+        const registerUser = new RegisterUser(userRepository,bcryptService)
+        const loginUser = new LoginUser(userRepository,jwtService,bcryptService)
 
         const authController = new AuthController(registerUser,loginUser)
 
