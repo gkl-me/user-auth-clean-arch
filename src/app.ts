@@ -4,6 +4,9 @@ import { DiContainer } from "./di/newContainer";
 import dotenv from 'dotenv'
 import connectDB from "./infrastructure/database/config";
 import { errorHandler } from "./interface/middlewares/errorHandler";
+import { validator } from "./interface/middlewares/validator";
+import { RegisterSchema } from "./interface/validators/RegisterSchema";
+import { LoginSchema } from "./interface/validators/LoginSchema";
 const app = express()
 
 dotenv.config()
@@ -17,8 +20,8 @@ const diContainer = DiContainer.getInstance()
 const authControl = diContainer.getDependencies('authController')
 
 
-app.post('/api/register',authControl.register)
-app.post('/api/login',authControl.login)
+app.post('/api/register',validator(RegisterSchema),authControl.register)
+app.post('/api/login',validator(LoginSchema),authControl.login)
 
 app.use(errorHandler)
 
