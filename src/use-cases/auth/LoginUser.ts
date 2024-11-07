@@ -1,7 +1,7 @@
-import { User } from "../domain/entities/User";
-import { UserRepository } from "../domain/repositories/userRepositories";
-import { JWTService } from "../infrastructure/auth/JWTService";
-import { LoginUserDTO } from "../interface/LoginUserDTO";
+import { User } from "../../domain/entities/User"; 
+import { UserRepository } from "../../domain/repositories/userRepositories"; 
+import { JWTService } from "../../infrastructure/auth/JWTService";
+import { LoginUserDTO } from "../../interface/dtos/LoginUserDTO"; 
 
 export class LoginUser{
     constructor(
@@ -11,7 +11,6 @@ export class LoginUser{
 
     async execute(dto:LoginUserDTO): Promise<{accessToken:string,refreshToken:string}>{
         const user =  await this.userRepository.findByEmail(dto.email)
-        console.log(user)
         if(!user || user.password != dto.password){
             throw new Error('Invalid Password or user email not found')
         }

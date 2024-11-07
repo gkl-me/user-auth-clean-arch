@@ -1,14 +1,20 @@
 import express from "express";
 import cookieParser from 'cookie-parser'
 import { container } from "./di/container";
+import { DiContainer } from "./di/newContainer";
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
-app.post('/api/register',(req,res) => container.authController.register(req,res))
-app.post('/api/login',(req,res) => container.authController.login(req,res))
+const diContainer = DiContainer.getInstance()
+
+const authControl = diContainer.getDependencies('authController')
+
+
+app.post('/api/register',authControl.register)
+app.post('/api/login',authControl.login)
 
 
 

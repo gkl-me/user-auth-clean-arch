@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import { RegisterUser } from "../../use-cases/auth/RegisterUseCase";
-import { LoginUser } from "../../use-cases/LoginUser";
+import { LoginUser } from "../../use-cases/auth/LoginUser"; 
 import { CreateUserDTO } from "../dtos/CreateUserDTO";
-import { LoginUserDTO } from "../LoginUserDTO";
+import { LoginUserDTO } from "../dtos/LoginUserDTO";
 
 export class AuthController{
     constructor(
         private registerUser:RegisterUser,
         private loginUser:LoginUser
-    ){}
+    ){
+        this.register = this.register.bind(this);
+        this.login = this.login.bind(this);
+    }
 
     async register(req:Request,res:Response){
         const dto:CreateUserDTO = req.body
