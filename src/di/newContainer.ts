@@ -1,4 +1,5 @@
 import { JWTService } from "../infrastructure/auth/JWTService";
+import { MongoRepository } from "../infrastructure/database/MongoReposittory";
 import { InMemory } from "../infrastructure/InMemory/InMemory";
 import { AuthController } from "../interface/controller/authController";
 import { LoginUser } from "../use-cases/auth/LoginUser";
@@ -22,7 +23,7 @@ export class DiContainer {
     private setDependencies(){
         const jwtService = new JWTService("access","refresh")
 
-        const userRepository = new InMemory()
+        const userRepository = new MongoRepository()
 
         const registerUser = new RegisterUser(userRepository)
         const loginUser = new LoginUser(userRepository,jwtService)

@@ -1,9 +1,12 @@
 import express from "express";
 import cookieParser from 'cookie-parser'
-import { container } from "./di/container";
 import { DiContainer } from "./di/newContainer";
+import dotenv from 'dotenv'
+import connectDB from "./infrastructure/database/config";
 const app = express()
 
+dotenv.config()
+connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())

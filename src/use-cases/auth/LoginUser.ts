@@ -1,11 +1,11 @@
 import { User } from "../../domain/entities/User"; 
-import { UserRepository } from "../../domain/repositories/userRepositories"; 
+import { IUserRepository } from "../../domain/repositories/IUserRepository"; 
 import { JWTService } from "../../infrastructure/auth/JWTService";
 import { LoginUserDTO } from "../../interface/dtos/LoginUserDTO"; 
 
 export class LoginUser{
     constructor(
-        private userRepository:UserRepository,
+        private userRepository:IUserRepository,
         private jwtService: JWTService
     ){}
 
