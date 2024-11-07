@@ -2,9 +2,8 @@ import { JWTService } from "../infrastructure/auth/JWTService";
 import { InMemory } from "../infrastructure/InMemory/InMemory";
 import { AuthController } from "../interface/controller/authController";
 import { RegisterUser } from "../use-cases/auth/RegisterUseCase";
-import { LoginUser } from "../use-cases/LoginUser";
+import { LoginUser } from "../use-cases/auth/LoginUser"; 
 import { UserRepository } from "../domain/repositories/userRepositories";
-// import { IJWTService } from "../domain/services/IJWTService";
 
 const createContainer = () => {
   const userRepository: UserRepository = new InMemory();
